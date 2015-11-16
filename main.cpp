@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
 
 	srand(time(NULL));								//set rand sequence
 	int arr_height = (2 * HEIGHT) + 1;
-	int arr_length = (2 * LENGTH) + 2;
+	int arr_length = (2 * LENGTH) + 1;
 	VECTOR MAZE(arr_height, vector <char> (arr_length));		//set maze
 
 	for (int i = 0; i < arr_height; i++)			//init maze with spaces
@@ -102,11 +102,19 @@ int main(int argc, char* argv[])
 		if (start == 0)								//start at left wall
 		{
 			start = rand() % (arr_height - 2) + 1;
+			if (start % 2 == 0)
+			{
+				start++;
+			}
 			MAZE.at(start).at(0) = ' ';
 		}
 		else										//start at right wall
 		{
 			start = rand() % (arr_height - 2) + 1;
+			if (start % 2 == 0)
+			{
+				start++;
+			}
 			MAZE.at(start).at(arr_length - 1) = ' ';
 		}
 	}
@@ -115,11 +123,19 @@ int main(int argc, char* argv[])
 		if (start == 2)								//start at top wall
 		{
 			start = rand() % (arr_length - 2) + 1;
+			if (start % 2 == 0)
+			{
+				start++;
+			}
 			MAZE.at(0).at(start) = ' ';
 		}
 		else										//start at bottom wall
 		{
 			start = rand() % (arr_length - 2) + 1;
+			if (start % 2 == 0)
+			{
+				start++;
+			}
 			MAZE.at(arr_height - 1).at(start) = ' ';
 		}
 	}
@@ -133,6 +149,10 @@ int main(int argc, char* argv[])
 			if (end == 0)							//end at left wall
 			{
 				end = rand() % (arr_height - 2) + 1;
+				if (end % 2 == 0)
+				{
+					end++;
+				}
 				if (MAZE.at(end).at(0) == ' ')
 				{
 					continue;	
@@ -146,6 +166,10 @@ int main(int argc, char* argv[])
 			else									//end at right wall
 			{
 				end = rand() % (arr_height - 2) + 1;
+				if (end % 2 == 0)
+				{
+					end++;
+				}
 				if (MAZE.at(end).at(arr_length - 1) == ' ')
 				{
 					continue;	
@@ -162,6 +186,10 @@ int main(int argc, char* argv[])
 			if (end == 2)							//end at top wall
 			{
 				end = rand() % (arr_length - 2) + 1;
+				if (end % 2 == 0)
+				{
+					end++;
+				}
 				if (MAZE.at(0).at(end) == ' ')
 				{
 					continue;	
@@ -175,6 +203,10 @@ int main(int argc, char* argv[])
 			else									//end at bottom wall
 			{
 				end = rand() % (arr_length - 2) + 1;
+				if (end % 2 == 0)
+				{
+					end++;
+				}
 				if (MAZE.at(arr_height - 1).at(end) == ' ')
 				{
 					continue;	
@@ -187,7 +219,7 @@ int main(int argc, char* argv[])
 			}
 		}
 	}
-
+	
 	print(MAZE, arr_height, arr_length);
 	return 0;
 }
