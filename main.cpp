@@ -85,14 +85,24 @@ bool go_up(VECTOR &MAZE, int h, int &i, int &j)
 
 bool check_maze(VECTOR MAZE, int h, int l, int &x, int &y)
 {
+	if (HEIGHT == 1 && LENGTH == 1)
+	{
+		return true;
+	}
 	for (int i = 1; i < h; i += 2)
 	{
 		for (int j = 1; j < l; j += 2)
 		{
-			if (MAZE.at(i - 1).at(j) == 'x' &&
-				MAZE.at(i + 1).at(j) == 'x' &&
-				MAZE.at(i).at(j - 1) == 'x' &&
-				MAZE.at(i).at(j + 1) == 'x')
+			int space = 0;
+			if (MAZE.at(i - 1).at(j) == ' ')
+				space++;
+			if (MAZE.at(i + 1).at(j) == ' ')
+				space++;
+			if (MAZE.at(i).at(j - 1) == ' ')
+				space++;
+			if	(MAZE.at(i).at(j + 1) == ' ')
+				space++;
+			if (space >= 3)
 			{
 				x = i;
 				y = j;
@@ -172,7 +182,61 @@ int main(int argc, char* argv[])
 			MAZE.at(i).at(j) = ' ';
 		}
 	}
+	
+	bool COMPLETE = false;
+	VECTOR PATH(arr_height, vector <char> (arr_length));
+	for (int i = 0; i < arr_height; i++)			//init maze with x
+	{
+		for (int j = 0; j < arr_length; j++)
+		{
+			PATH.at(i).at(j) = ' ';
+		}
+	}
+	int i = 1;
+	int j = 1;
+	PATH.at(1).at(1) = 'x';
+	while (!COMPLETE)
+	{
+		int y = rand() % 4;
+		if (y == 0)
+		{
+			if (go_up(MAZE, arr_height, i, j))
+			{
+				PATH.at(i).at(j) = 'x';
+				PATH.at(i + 1).at(j) = 'x';
+			}
+		}
+		else if (y == 1)
+		{
+			if (go_down(MAZE, arr_height, i, j))
+			{
+				PATH.at(i).at(j) = 'x';
+				PATH.at(i - 1).at(j) = 'x';
+			}
+		}
+		else if (y == 2)
+		{
+			if (go_left(MAZE, arr_length, i, j))
+			{
+				PATH.at(i).at(j) = 'x';
+				PATH.at(i).at(j + 1) = 'x';
+			}
+		}
+		else
+		{
+			if (go_right(MAZE, arr_length, i, j))
+			{
+				PATH.at(i).at(j) = 'x';
+				PATH.at(i).at(j - 1) = 'x';
+			}
+		}
 
+		if (check_maze(PATH, arr_height, arr_length, i, j))	//check paths are complete
+		{
+			COMPLETE = true;
+		}
+	}
+	
 	//Set start point
 	int start = rand() % 4;
 	if (start < 2)									//start at left or right
@@ -299,68 +363,9 @@ int main(int argc, char* argv[])
 			}
 		}
 	}
-
-	bool COMPLETE = false;
-	bool FIRST = true;
-	int i = 1;
-	int j = 1;
-	while (!COMPLETE)
-	{
-		if (FIRST)
-		{
-			for (int x = 0; x < HEIGHT * LENGTH; x++)
-			{
-				int y = rand() % 4;
-				if (y == 0)
-				{
-					if (!go_up(MAZE, arr_height, i, j))
-						x--;
-				}
-				else if (y == 1)
-				{
-					if (!go_down(MAZE, arr_height, i, j))
-						x--;
-				}
-				else if (y == 2)
-				{
-					if (!go_left(MAZE, arr_length, i, j))
-						x--;
-				}
-				else
-				{
-					if (!go_right(MAZE, arr_length, i, j))
-						x--;
-				}
-			}
-			FIRST = false;
-		}
-		else
-		{
-			int y = rand() % 4;
-			if (y == 0)
-			{
-				go_up(MAZE, arr_height, i, j);
-			}
-			else if (y == 1)
-			{
-				go_down(MAZE, arr_height, i, j);
-			}
-			else if (y == 2)
-			{
-				go_left(MAZE, arr_length, i, j);
-			}
-			else
-			{
-				go_right(MAZE, arr_length, i, j);
-			}
-		}
-
-		if (check_maze(MAZE, arr_height, arr_length, i, j))	//check paths are complete
-		{
-			COMPLETE = true;
-		}
-	}
-	
 	print(MAZE, arr_height, arr_length);
+
+	cout << endl;
+	print(PATH, arr_height, arr_length);
 	return 0;
 }
