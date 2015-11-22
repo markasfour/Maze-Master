@@ -11,8 +11,71 @@ unsigned int HEIGHT = 1;
 int arr_height = 3;
 int arr_length = 3;
 
+void beautify(VECTOR &MAZE, int h, int l)
+{
+	bool left = false;
+	bool right = false;
+	bool up = false;
+	bool down = false;
+	for (int i = 0; i < h; i++)
+	{
+		for (int j = 0; j < l; j++)
+		{
+			if (MAZE.at(i).at(j) == 'x')
+			{
+				if (j - 1 >= 0)
+				{
+					if (MAZE.at(i).at(j - 1) != ' ')
+					{
+						left = true;
+					}
+				}
+				if (j + 1 < l)
+				{
+					if (MAZE.at(i).at(j + 1) != ' ')
+					{
+						right = true;
+					}
+				}
+				if (i - 1 >= 0)
+				{
+					if (MAZE.at(i - 1).at(j) != ' ')
+					{
+						up = true; 
+					}
+				}
+				if (i + 1 < h)
+				{
+					if (MAZE.at(i + 1).at(j) != ' ')
+					{
+						down = true;
+					}
+				}
+			
+				if (left && right && !(up && down))
+				{
+					MAZE.at(i).at(j) = '-';
+				}
+				else if (up && down && !(left && right))
+				{
+					MAZE.at(i).at(j) = '|';
+				}
+				else
+				{
+					MAZE.at(i).at(j) = '+';
+				}
+			}
+			left = false;
+			right = false;
+			up = false;
+			down = false;
+		}
+	}
+}
+
 void print(VECTOR MAZE, int h, int l)
 {
+	beautify(MAZE, h, l);
 	for (int i = 0; i < h; i++)
 	{
 		for (int j = 0; j < l; j++)
@@ -366,6 +429,6 @@ int main(int argc, char* argv[])
 	print(MAZE, arr_height, arr_length);
 
 	cout << endl;
-	print(PATH, arr_height, arr_length);
+	//print(PATH, arr_height, arr_length);
 	return 0;
 }
