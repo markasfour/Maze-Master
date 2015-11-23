@@ -347,6 +347,10 @@ int main(int argc, char* argv[])
 	remove_floaters(MAZE, arr_height, arr_length);
 	
 	//Set start point
+	bool LEFT = false;
+	bool RIGHT = false;
+	bool TOP = false;
+	bool BOTTOM = false;
 	int start = rand() % 4;
 	if (start < 2)									//start at left or right
 	{
@@ -358,6 +362,7 @@ int main(int argc, char* argv[])
 				start++;
 			}
 			MAZE.at(start).at(0) = ' ';
+			LEFT = true;
 		}
 		else										//start at right wall
 		{
@@ -367,6 +372,7 @@ int main(int argc, char* argv[])
 				start++;
 			}
 			MAZE.at(start).at(arr_length - 1) = ' ';
+			RIGHT = true;
 		}
 	}
 	else
@@ -379,6 +385,7 @@ int main(int argc, char* argv[])
 				start++;
 			}
 			MAZE.at(0).at(start) = ' ';
+			TOP = true;
 		}
 		else										//start at bottom wall
 		{
@@ -388,93 +395,49 @@ int main(int argc, char* argv[])
 				start++;
 			}
 			MAZE.at(arr_height - 1).at(start) = ' ';
+			BOTTOM = true;
 		}
 	}
 	
-	//Set end point
+	//Set end point on opposite side of start
 	int end;
-	bool SAME = true;								//if start and end are same
-	while (SAME)
+	if (RIGHT)							//end at left wall
 	{
-		end = rand() % 4;
-		if (end < 2)								//end at left or right
+		end = rand() % (arr_height - 2) + 1;
+		if (end % 2 == 0)
 		{
-			if (end == 0)							//end at left wall
-			{
-				end = rand() % (arr_height - 2) + 1;
-				if (end % 2 == 0)
-				{
-					end++;
-				}
-				if (MAZE.at(end).at(0) == ' ')
-				{
-					continue;	
-				}
-				else
-				{
-					MAZE.at(end).at(0) = ' ';
-					SAME = false;
-				}
-			}
-			else									//end at right wall
-			{
-				end = rand() % (arr_height - 2) + 1;
-				if (end % 2 == 0)
-				{
-					end++;
-				}
-				if (MAZE.at(end).at(arr_length - 1) == ' ')
-				{
-					continue;	
-				}
-				else
-				{
-					MAZE.at(end).at(arr_length - 1) = ' ';
-					SAME = false;
-				}
-			}
+			end++;
 		}
-		else
+		MAZE.at(end).at(0) = ' ';
+	}
+	else if (LEFT)						//end at right wall
+	{
+		end = rand() % (arr_height - 2) + 1;
+		if (end % 2 == 0)
 		{
-			if (end == 2)							//end at top wall
-			{
-				end = rand() % (arr_length - 2) + 1;
-				if (end % 2 == 0)
-				{
-					end++;
-				}
-				if (MAZE.at(0).at(end) == ' ')
-				{
-					continue;	
-				}
-				else
-				{
-					MAZE.at(0).at(end) = ' ';
-					SAME = false;
-				}
-			}
-			else									//end at bottom wall
-			{
-				end = rand() % (arr_length - 2) + 1;
-				if (end % 2 == 0)
-				{
-					end++;
-				}
-				if (MAZE.at(arr_height - 1).at(end) == ' ')
-				{
-					continue;	
-				}
-				else
-				{
-					MAZE.at(arr_height - 1).at(end) = ' ';
-					SAME = false;
-				}
-			}
+			end++;
 		}
+		MAZE.at(end).at(arr_length - 1) = ' ';
+	}
+	else if (BOTTOM)					//end at top wall
+	{
+		end = rand() % (arr_length - 2) + 1;
+		if (end % 2 == 0)
+		{
+			end++;
+		}
+		MAZE.at(0).at(end) = ' ';
+	}
+	else if (TOP)						//end at bottom wall
+	{
+		end = rand() % (arr_length - 2) + 1;
+		if (end % 2 == 0)
+		{
+			end++;
+		}
+		MAZE.at(arr_height - 1).at(end) = ' ';
 	}
 	print(MAZE, arr_height, arr_length);
 
-	cout << endl;
-	//print(PATH, arr_height, arr_length);
 	return 0;
 }
