@@ -234,20 +234,18 @@ int main(int argc, char* argv[])
 		}
 		else
 		{
-			char l = *argv[1];
-			char h = *argv[2];
-			if (l - '0' <= 0)						//must be >= 0
+			LENGTH = atoi(argv[1]);
+			HEIGHT = atoi(argv[2]);
+			if (LENGTH == 0)						//must be > 0
 			{
 				cout << "Invalid length" << endl;
 				return 1;
 			}
-			LENGTH = l - '0';
-			if (h - '0' <= 0)						//must be >= 0
+			if (HEIGHT == 0)						//must be > 0
 			{
 				cout << "Invalid height" << endl;
 				return 1;
 			}
-			HEIGHT = h - '0';
 		}
 	}
 	if (argc > 3)									//too many args passed
