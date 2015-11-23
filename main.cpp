@@ -176,6 +176,53 @@ bool check_maze(VECTOR MAZE, int h, int l, int &x, int &y)
 	return true;
 }
 
+void remove_floaters(VECTOR &MAZE, int h, int l)
+{
+	if (HEIGHT == 1 || LENGTH == 1)
+	{
+		return;
+	}
+	for (int i = 1; i < h - 1; i ++)
+	{
+		for (int j = 1; j < l - 1; j ++)
+		{
+			int space = 0;
+			if (MAZE.at(i).at(j) == 'x')
+			{
+				int space = 0;
+				if (MAZE.at(i - 1).at(j) == ' ')
+					space++;
+				if (MAZE.at(i + 1).at(j) == ' ')
+					space++;
+				if (MAZE.at(i).at(j - 1) == ' ')
+					space++;
+				if	(MAZE.at(i).at(j + 1) == ' ')
+					space++;
+				if (space == 4)
+				{
+					int y = rand() % 4;
+					if (y == 0)
+					{
+						MAZE.at(i - 1).at(j) = 'x';
+					}
+					else if (y == 1)
+					{
+						MAZE.at(i + 1).at(j) = 'x';
+					}
+					else if (y == 2)
+					{
+						MAZE.at(i).at(j - 1) = 'x';
+					}
+					else
+					{
+						MAZE.at(i).at(j + 1) = 'x';
+					}
+				}
+			}
+		}
+	}
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc > 1 && argc < 4)						//if length & height passed
@@ -299,6 +346,7 @@ int main(int argc, char* argv[])
 			COMPLETE = true;
 		}
 	}
+	remove_floaters(MAZE, arr_height, arr_length);
 	
 	//Set start point
 	int start = rand() % 4;
