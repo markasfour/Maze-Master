@@ -71,14 +71,28 @@ void beautify(VECTOR &MAZE, int h, int l)
 			down = false;
 		}
 	}
+	for (int i = 0; i < h; i++)
+	{
+		for (int j = l - 2; j > -1; j -= 2)
+		{
+			if (MAZE.at(i).at(j) == ' ')
+			{
+				MAZE.at(i).insert(MAZE.at(i).begin() + j + 1, ' ');
+			}
+			else
+			{
+				MAZE.at(i).insert(MAZE.at(i).begin() + j + 1, '-');
+			}
+		}
+	}
 }
 
 void print(VECTOR MAZE, int h, int l)
 {
 	beautify(MAZE, h, l);
-	for (int i = 0; i < h; i++)
+	for (int i = 0; i < MAZE.size(); i++)
 	{
-		for (int j = 0; j < l; j++)
+		for (int j = 0; j < MAZE.at(i).size(); j++)
 		{
 			cout << MAZE.at(i).at(j);
 		}
