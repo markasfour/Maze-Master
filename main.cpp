@@ -5,6 +5,7 @@
 #include "aesthetics.h"
 #include "operators.h"
 #include "easy.h"
+#include "hard.h"
 using namespace std;
 
 typedef vector < vector<char> > VECTOR;
@@ -96,7 +97,8 @@ int main(int argc, char* argv[])
 
 	maze_init(MAZE, arr_height, arr_length);	
 	
-	gen_easy(MAZE, arr_height, arr_length);
+	//gen_easy(MAZE, arr_height, arr_length);
+	gen_hard(MAZE, arr_height, arr_length);
 	set_start_end(MAZE, arr_height, arr_length);
 
 	print(MAZE, arr_height, arr_length);
