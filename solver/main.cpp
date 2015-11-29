@@ -117,7 +117,7 @@ void find_end(vector < vector <char> > MAZE, node &end)
 	{
 		if (MAZE.at(MAZE.size() - 1).at(j) == ' ')
 		{
-			end.i = MAZE.size();
+			end.i = MAZE.size() - 1;
 			end.j = j;
 			return;
 		}
@@ -241,6 +241,20 @@ void search(vector < vector <char> > &MAZE, node start, node end)
 		}
 	}
 	cout << "NO SOLUTION" << endl;
+	for (int i = 0; i < VISITED.size(); i++)
+	{
+		int a = VISITED.at(i).i;
+		int b = VISITED.at(i).j;
+		MAZE.at(a).at(b) = 'x';
+	}
+	for (int i = 0; i < MAZE.size(); i++)
+	{
+		for (int j = 0; j < MAZE.at(i).size(); j++)
+		{
+			cout << MAZE.at(i).at(j);
+		}
+		cout << endl;
+	}
 }
 
 int main(int argc, char *argv[])
