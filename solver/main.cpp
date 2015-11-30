@@ -262,7 +262,7 @@ int main(int argc, char *argv[])
 	string filename;
 	if (argc == 2)
 	{
-		filename = argv[2];
+		filename = argv[1];
 	}
 	if (argc == 1)
 	{

@@ -15,9 +15,9 @@ unsigned int HEIGHT = 1;
 int arr_height = 3;
 int arr_length = 3;
 
-bool get_input(int argc, char* argv[])
+bool get_input(int argc, char* argv[], string & mode)
 {
-	if (argc > 1 && argc < 4)						//if length & height passed
+	if (argc > 1 && argc < 5)						//if length & height passed
 	{
 		if (argc == 2)								//missing one arg
 		{
@@ -42,8 +42,18 @@ bool get_input(int argc, char* argv[])
 	}
 	if (argc > 3)									//too many args passed
 	{
-		cout << "Too many arguments" << endl;
-		return false;
+		if (argc > 4)
+		{
+			cout << "Too many arguments" << endl;
+			return false;
+		}
+		else if (argv[3] == "e" || argv[3] == "E" || 
+				 argv[3] == "easy" || argv[3] == "Easy")
+		{
+			mode = "e";
+		}
+		else
+			mode = "h";
 	}
 	if (argc == 1)									//no args passed
 	{
@@ -61,6 +71,17 @@ bool get_input(int argc, char* argv[])
 		}
 		LENGTH = l;
 		HEIGHT = h;
+		cout << "Enter the difficulty of the maze. ";
+		cout << "1 for easy, 2 for hard." << endl;
+		int d = 0;
+		while (d <= 0 || d > 2)
+		{
+			cin >> d;
+		}
+		if (d == 1)
+			mode = "e";
+		else
+			mode = "h";
 	}
 	return true;
 }
@@ -85,7 +106,8 @@ void maze_init(VECTOR &MAZE, int arr_height, int arr_length)
 
 int main(int argc, char* argv[])
 {
-	if (!get_input(argc, argv))
+	string mode;
+	if (!get_input(argc, argv, mode))
 	{
 		return 1;
 	}
@@ -97,8 +119,10 @@ int main(int argc, char* argv[])
 
 	maze_init(MAZE, arr_height, arr_length);	
 	
-	//gen_easy(MAZE, arr_height, arr_length);
-	gen_hard(MAZE, arr_height, arr_length);
+	if (mode == "e")
+		gen_easy(MAZE, arr_height, arr_length);
+	else
+		gen_hard(MAZE, arr_height, arr_length);
 	set_start_end(MAZE, arr_height, arr_length);
 
 	print(MAZE, arr_height, arr_length);
