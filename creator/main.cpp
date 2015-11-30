@@ -28,12 +28,12 @@ bool get_input(int argc, char* argv[], string & mode)
 		{
 			LENGTH = atoi(argv[1]);
 			HEIGHT = atoi(argv[2]);
-			if (LENGTH == 0)						//must be > 0
+			if (LENGTH <= 0)						//must be > 0
 			{
 				cout << "Invalid length" << endl;
 				return false;
 			}
-			if (HEIGHT == 0)						//must be > 0
+			if (HEIGHT <= 0)						//must be > 0
 			{
 				cout << "Invalid height" << endl;
 				return false;
@@ -42,13 +42,13 @@ bool get_input(int argc, char* argv[], string & mode)
 	}
 	if (argc > 3)									//too many args passed
 	{
+		mode = argv[3];
 		if (argc > 4)
 		{
 			cout << "Too many arguments" << endl;
 			return false;
 		}
-		else if (argv[3] == "e" || argv[3] == "E" || 
-				 argv[3] == "easy" || argv[3] == "Easy")
+		if (mode == "e" || mode == "E" || mode == "easy" || mode == "Easy")
 		{
 			mode = "e";
 		}
