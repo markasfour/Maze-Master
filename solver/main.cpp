@@ -4,7 +4,6 @@
 #include <vector>
 #include <queue>
 #include <stack>
-#include <cmath>
 using namespace std;
 
 struct node {
@@ -138,8 +137,12 @@ bool already_visited(node n)
 
 double heuristic(node n, node end)
 {
-	int x = abs(n.i - end.i);
-	int y = abs(n.j - end.j);
+	int x = n.i - end.i;
+	if (x < 0)
+		x *= -1;
+	int y = n.j - end.j;
+	if (y < 0)
+		y *= -1;
 	return x + y;
 }
 
