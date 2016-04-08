@@ -1,0 +1,72 @@
+body {
+	background-color: #FFFFFF;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Ubuntu', sans-serif;
+	color: #00BFFF;
+}
+
+#main-container {
+	position: relative;
+	width: 85%;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#top-header {
+	width: 100%;
+	height; 55px;
+	margin: 0 auto;
+	display: block;
+	border-radius: 0 0 3px 3px;
+}
+
+#top-header > div {
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+#logo {
+	padding: 5px 10px 0;
+	margin: 0 auto;
+	font-size: 40px;
+}
+
+#demo-showcase {
+	width: 85%;
+	margin: 0 auto;
+	display: table;
+	padding 5px;
+}
+
+#demo-container {
+	margin: 0 auto;
+}
+
+#demo {
+	margin: 0 auto;
+}
+
+#about-container {
+	width: 85%;
+	margin: 0 auto;
+}
+
+#about-text {
+	text-align: center;
+	margin: 0 auto;
+}
+
+#footer {
+	padding: 15px;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+	font-size: 16px;
+}
