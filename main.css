@@ -19,23 +19,28 @@ body {
 	margin-right: auto;
 }
 
-#top-header {
-	width: 100%;
-	height; 55px;
-	margin: 0 auto;
-	display: block;
-	border-radius: 0 0 3px 3px;
-}
-
-#top-header > div {
-	display: inline-block;
-	vertical-align: bottom;
-}
-
 #logo {
 	padding: 5px 10px 0;
 	margin: 0 auto;
 	font-size: 40px;
+}
+
+#top-link-container {
+	width: 90%;
+	display: table;
+	margin: 0 auto;
+}
+
+#top-link-container > div {
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	margin: 0 auto; 
+}
+
+#ad-container {
+	padding: 5px;
+	margin: 0 auto;
 }
 
 #demo-showcase {
@@ -51,6 +56,7 @@ body {
 
 #demo {
 	margin: 0 auto;
+	box-shadow: #FFFFFF;
 }
 
 #about-container {
@@ -69,4 +75,15 @@ body {
 	display: block;
 	margin: 0 auto;
 	font-size: 16px;
+}
+
+a {
+	text-decoration: none;
+	color: #00BFFF;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #FF0000;
+	text-shadow: 0 0 1px #FF0000;
 }
