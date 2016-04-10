@@ -95,22 +95,10 @@ void keyPressed() {
     } 
   } 
 }
-///////////////////////////////////////////////////////
-boolean isSolved(Ball b) {
- if (b.position.y != 23 || b.position.x != 61) {
-   solved = false;
-   return false;
- }
- score++;
- if (score % 3 == 0 && score > 0 && lives < 5) {
-   lives++;
- }
- solved = true;
- return true;
-}
 
-document.addEventListener('touchstart', handleTouchStart, false);        
-document.addEventListener('touchmove', handleTouchMove, false);
+var game = document.getElementById("demo");
+game.addEventListener('touchstart', handleTouchStart, false);        
+game.addEventListener('touchmove', handleTouchMove, false);
 
 var xDown = null;                                                        
 var yDown = null;                                                        
@@ -152,6 +140,19 @@ function handleTouchMove(evt) {
     xDown = null;
     yDown = null;                                             
 };
+///////////////////////////////////////////////////////
+boolean isSolved(Ball b) {
+ if (b.position.y != 23 || b.position.x != 61) {
+   solved = false;
+   return false;
+ }
+ score++;
+ if (score % 3 == 0 && score > 0 && lives < 5) {
+   lives++;
+ }
+ solved = true;
+ return true;
+}
 ///////////////////////////////////////////////////////
 class Ball {
  PVector position;
