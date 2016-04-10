@@ -97,6 +97,7 @@ void keyPressed() {
 }
 
 var game = document.getElementById("demo");
+
 game.addEventListener('touchstart', handleTouchStart, false);        
 game.addEventListener('touchmove', handleTouchMove, false);
 
