@@ -36,7 +36,7 @@ void setup() {
 void draw() {
   //main background
   fill(255, 77);
-  filter(BLUR);
+  //filter(BLUR);
   rect(0, 0, width, 461);
   
   //score rect
